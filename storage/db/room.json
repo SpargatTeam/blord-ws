@@ -1,0 +1,32 @@
+{
+    "rooms": [
+        {
+            "id": "default_room_001",
+            "name": "Main Game Hall",
+            "type": "3d",
+            "maxPlayers": 20,
+            "currentPlayers": 0,
+            "gameMode": "free_roam",
+            "environment": {
+                "skybox": "default_sky",
+                "terrain": "flat_ground",
+                "lighting": "daylight"
+            },
+            "objects": [],
+            "activeGames": []
+        }
+    ],
+    "roomTemplates": [
+        {
+            "templateId": "battle_arena",
+            "name": "Battle Arena",
+            "maxPlayers": 10,
+            "gameMode": "pvp",
+            "environment": {
+                "skybox": "arena_sky",
+                "terrain": "combat_zone",
+                "lighting": "dramatic"
+            }
+        }
+    ]
+}

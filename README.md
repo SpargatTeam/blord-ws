@@ -12,3 +12,9 @@ npm run server
 ## Contribute
 
 ### Fork this project and do a request with edited code
+
+## Copyrights
+
+### Forked from BlockmanLauncher-NEXT
+
+# All rights reserved to SpargatTeam.

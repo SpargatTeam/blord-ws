@@ -1,0 +1,15 @@
+[
+    {
+        "id": 1,
+        "username": "Admin",
+        "name": "Admin",
+        "country": "RO",
+        "lang": "RO",
+        "description": "Owner of Blockman Launcher.",
+        "avatar": "/static/images/dev_profile/Comical.png",
+        "coins": 1e+75,
+        "cubes": 1e+75,
+        "role": 7,
+        "accessToken": "1"
+    }
+]
