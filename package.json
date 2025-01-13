@@ -1,0 +1,29 @@
+{
+    "name": "blord-ws",
+    "version": "1.0.0",
+    "description": "BLORD WebSoket server",
+    "author": "Spargat Team",
+    "license": "SPARGAT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/SpargatTeam/blord-ws.git"
+    },
+    "bugs": {
+        "url": "https://github.com/SpargatTeam/blord-ws/issues"
+    },
+    "keywords": [
+        "blockman",
+        "launcher"
+    ],
+    "scripts": {
+        "server": "node server.js",
+        "server_dev": "nodemon server.js"
+    },
+    "dependencies": {
+        "ws": "latest",
+        "dotenv": "latest"
+    },
+    "devDependencies": {
+        "nodemon": "latest"
+    }
+}
