@@ -13,6 +13,12 @@ npm run server
 
 ### Fork this project and do a request with edited code
 
+[![Forkers repo roster for @SpargatTeam/blord-ws](https://reporoster.com/forks/SpargatTeam/blord-ws)](https://github.com/SpargatTeam/blord-ws/network/members)
+
+### Stars
+
+[![Stargazers repo roster for @SpargatTeam/blord-ws](https://reporoster.com/stars/SpargatTeam/blord-ws)](https://github.com/SpargatTeam/blord-ws/stargazers)
+
 ## Copyrights
 
 ### Forked from BlockmanLauncher-NEXT
