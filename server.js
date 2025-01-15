@@ -16,25 +16,36 @@ const wss = new WebSocket.Server({ port: process.env.WS_PORT || 15999 });
 //// server
 const players = [];
 wss.on('connection', (ws) => {
-    console.log('New player connected!');
+    customLog('INFO', 'New player connected!');
     players.push(ws);
     ws.send(JSON.stringify({ message: 'Welcome to the 3D game!' }));
     ws.on('message', (message) => {
-        console.log('Received:', message);
-        const data = JSON.parse(message);
-        players.forEach(player => {
-            if (player !== ws) {
-                player.send(JSON.stringify({ update: data }));
-            }
-        });
+        customLog('INFO', 'Received: ' + message);  
+        try {
+            const data = JSON.parse(message);
+            players.forEach(player => {
+                if (player !== ws) {
+                    player.send(JSON.stringify({ update: data }));
+                }
+            });
+        } catch (error) {
+            customLog('ERROR', 'Error parsing message: ' + error);
+            ws.send(JSON.stringify({ error: 'Invalid message format.' }));
+        }
     });
     ws.on('close', () => {
-        console.log('Player disconnected');
+        customLog('INFO', 'Player disconnected');
         const index = players.indexOf(ws);
         if (index > -1) {
             players.splice(index, 1);
         }
     });
+    ws.on('error', (error) => {
+        customLog('ERROR', 'WebSocket error: ' + error);
+    });
+});
+wss.on('error', (error) => {
+    customLog('ERROR', 'WebSocket server error: ' + error);
 });
 customLog('SUCCESS', 'WebSocket server started');
 customLog('INFO', `Listening on port ws://localhost:${process.env.WS_PORT || 15999}`);
