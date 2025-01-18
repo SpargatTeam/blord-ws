@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "ws": "latest",
+        "request-ip": "latest",
         "dotenv": "latest"
     },
     "devDependencies": {

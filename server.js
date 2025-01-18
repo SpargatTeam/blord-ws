@@ -10,15 +10,17 @@ const path = require('path');
 const os = require('os');
 const fs = require('fs');
 const WebSocket = require('ws');
+const requestIp = require('request-ip');
 //// configs
 require('dotenv').config({ path: './ws.env' });
 const wss = new WebSocket.Server({ port: process.env.WS_PORT || 15999 });
 //// server
 const players = [];
-wss.on('connection', (ws) => {
-    customLog('INFO', 'New player connected!');
+wss.on('connection', (ws, req) => {
+    const clientIp = requestIp.getClientIp(req);
+    customLog('INFO', 'New player connected from'); 
     players.push(ws);
-    ws.send(JSON.stringify({ message: 'Welcome to the 3D game!' }));
+    ws.send(JSON.stringify({ message: 'Welcome to BLORD!' }));
     ws.on('message', (message) => {
         customLog('INFO', 'Received: ' + message);  
         try {
@@ -34,7 +36,7 @@ wss.on('connection', (ws) => {
         }
     });
     ws.on('close', () => {
-        customLog('INFO', 'Player disconnected');
+        customLog('INFO', 'Player disconnected'); 
         const index = players.indexOf(ws);
         if (index > -1) {
             players.splice(index, 1);
@@ -43,9 +45,6 @@ wss.on('connection', (ws) => {
     ws.on('error', (error) => {
         customLog('ERROR', 'WebSocket error: ' + error);
     });
-});
-wss.on('error', (error) => {
-    customLog('ERROR', 'WebSocket server error: ' + error);
 });
 customLog('SUCCESS', 'WebSocket server started');
 customLog('INFO', `Listening on port ws://localhost:${process.env.WS_PORT || 15999}`);
