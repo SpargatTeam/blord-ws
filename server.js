@@ -41,7 +41,6 @@ setInterval(() => {
         customLog('ERROR', "Error loading players or users list: " + error);
     }
 }, 5000);  // we check at 5 seconds for modifications
-
 /// on connection
 wss.on('connection', (ws, req) => {
     const clientIp = requestIp.getClientIp(req);
@@ -70,10 +69,6 @@ wss.on('connection', (ws, req) => {
                     }
                 });
             } else {
-                // More detailed debug logging for failed authentication
-                customLog('INFO', `Authentication failed. Searched for user with ID ${id} and token ${token}`);
-                customLog('INFO', `Available users: ${JSON.stringify(users.map(u => ({ id: u.id, token: u.accessToken })))}`);
-                
                 ws.send(JSON.stringify({ start: 'disconnect' })); // disconnect invalid user
                 ws.close();
                 customLog('INFO', 'Invalid user credentials, disconnecting...');
