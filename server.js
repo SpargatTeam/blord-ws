@@ -45,6 +45,7 @@ setInterval(() => {
 wss.on('connection', (ws, req) => {
     const clientIp = requestIp.getClientIp(req);
     customLog('INFO', 'New player connected');
+    ws.send(JSON.stringify({ message: 'Welcome to Blockman Launcher BlockmaanLORD' }));
     ws.send(JSON.stringify({ start: 'loading' }));
     ws.on('message', (message) => {
         customLog('INFO', 'Received: ' + message); 
