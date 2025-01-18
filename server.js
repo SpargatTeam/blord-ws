@@ -15,7 +15,24 @@ const requestIp = require('request-ip');
 require('dotenv').config({ path: './ws.env' });
 const wss = new WebSocket.Server({ port: process.env.WS_PORT || 15999 });
 //// server
-const players = [];
+/// players
+const playersPath = './storage/db/users.json'; // we load user list
+if (!fs.existsSync(playersPath)) {
+    fs.writeFileSync(playersPath, JSON.stringify([]), 'utf-8');
+}
+const players = JSON.parse(fs.readFileSync(playersPath, 'utf-8')); // loaded plyaer list
+setInterval(() => {
+    try {
+        const updatedPlayers = JSON.parse(fs.readFileSync(playersPath, 'utf-8'));
+        if (JSON.stringify(updatedPlayers) !== JSON.stringify(players)) {
+            customLog('INFO', 'Players list updated');
+            players = updatedPlayers;
+        }
+    } catch (error) {
+        customLog('ERROR', "Error loading players list: " + error);
+    }
+}, 5000);  // we check at 5 seconds for modifications
+// on conection
 wss.on('connection', (ws, req) => {
     const clientIp = requestIp.getClientIp(req);
     customLog('INFO', 'New player connected'); 
@@ -43,7 +60,7 @@ wss.on('connection', (ws, req) => {
         customLog('INFO', 'Player disconnected');  // an user disconected
         const index = players.indexOf(ws);
         if (index > -1) {
-            players.splice(index, 1);
+            players.splice(index, 1); // we remove the player from the list
         }
         players.forEach(player => {
             player.send(JSON.stringify({ chat: 'A player has disconnected.' })); // we send to everyone the news someone disconected from the game
