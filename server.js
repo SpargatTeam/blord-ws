@@ -37,11 +37,14 @@ wss.on('connection', (ws, req) => {
         }
     });
     ws.on('close', () => {
-        customLog('INFO', 'Player disconnected'); 
+        customLog('INFO', 'Player disconnected');  // an user disconected
         const index = players.indexOf(ws);
         if (index > -1) {
             players.splice(index, 1);
         }
+        players.forEach(player => {
+            player.send(JSON.stringify({ chat: 'A player has disconnected.' })); // we send to everyone the news someone disconected from the game
+        });
     });
     ws.on('error', (error) => {
         customLog('ERROR', 'WebSocket error: ' + error);
