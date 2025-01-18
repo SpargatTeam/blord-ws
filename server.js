@@ -24,6 +24,9 @@ wss.on('connection', (ws, req) => {
     ws.send(JSON.stringify({ start: 'loading' })); // make client show the loading screen
     ws.on('message', (message) => {
         customLog('INFO', 'Received: ' + message);  // datas between client and server
+        players.forEach(player => {
+            player.send(JSON.stringify({ message: message, userId: player.userId })); // we send to everyone what a player did
+        });
         try {
             const data = JSON.parse(message);
             players.forEach(player => {
