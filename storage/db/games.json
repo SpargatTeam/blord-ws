@@ -1,9 +1,18 @@
 [
     {
-        "gid": "g1000",
-        "gmap": "g100",
+        "gid": "g1001",
+        "gmap": "m101",
         "gimage": "http://staticgs.sandboxol.com/sandbox/games/images/g2033-1657779574246.png",
-        "gname": "Anime Fighting Simulator",
+        "gname": "game",
+        "gtags": "expore",
         "gdescription": "A game"
+    },
+    {
+        "gid": "g1002",
+        "gmap": "m102",
+        "gimage": "http://staticgs.sandboxol.com/sandbox/games/images/g2033-1657779574246.png",
+        "gname": "template",
+        "gtags": "expore",
+        "gdescription": "A template"
     }
 ]
