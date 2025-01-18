@@ -18,11 +18,12 @@ const wss = new WebSocket.Server({ port: process.env.WS_PORT || 15999 });
 const players = [];
 wss.on('connection', (ws, req) => {
     const clientIp = requestIp.getClientIp(req);
-    customLog('INFO', 'New player connected from'); 
+    customLog('INFO', 'New player connected'); 
     players.push(ws);
-    ws.send(JSON.stringify({ message: 'Welcome to BLORD!' }));
+    ws.send(JSON.stringify({ message: 'Welcome to BLORD!' })); // sent a welcome message
+    ws.send(JSON.stringify({ start: 'loading' })); // make client show the loading screen
     ws.on('message', (message) => {
-        customLog('INFO', 'Received: ' + message);  
+        customLog('INFO', 'Received: ' + message);  // datas between client and server
         try {
             const data = JSON.parse(message);
             players.forEach(player => {
